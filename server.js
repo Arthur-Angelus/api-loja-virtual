@@ -1,28 +1,17 @@
-//importa o modulo express
-const express = require('express');
+const express = require('express')
 
-//importa as rotas de usuario
-//const userRoutes = require('./src/routes/userRoutes');
+const clientRoutes = require('./src/routes/clientRoutes.js')
+const productRoutes = require('./src/routes/productRoutes.js')
 
-//cria uma aplicação express
 const app = express()
 
-//middleware paara analisar JSON no corpo das requisições
-app.use(express.json());
+app.use(express.json())
 
-//define a porta em que o servidor ira escutar
 const porta = 3000
 
+app.use('/api/products', productRoutes)
+app.use('/api/clients', clientRoutes)
 
-//rota de teste da api
-app.get('/', (req, res)=>{
-    res.send("Testando a api")
-});
-
-//usando as rotas de usuario
-//app.use('/api/users', userRoutes);
-
-//inicia o servidor
 app.listen(porta, () => {
-    console.log(`Servidor rodando em http:${porta}`);
-});
+    console.log(`Servidor rodando em http://localhost:${porta}`)
+})
